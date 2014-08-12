@@ -3,24 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package texteditor;
 
+import java.io.File;
 import javax.swing.JFileChooser;
 
 /**
- *
- * @author Danny
+ * The UI component of the file select view. Used for opening old text files or
+ * save files
  */
 public class FileSelectView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FileView
-     */
     FileController fileController;
+
+    /**
+     * Constructor for the file select view
+     *
+     * @param fileController A FileController object that controls the files of
+     * the editor
+     */
     public FileSelectView(FileController fileController) {
         initComponents();
-        this.fileController=fileController;
+        this.fileController = fileController;
+        jFileChooser1.setCurrentDirectory(new File(System.getProperty("user.dir")));
     }
 
     /**
@@ -35,6 +40,8 @@ public class FileSelectView extends javax.swing.JFrame {
         jFileChooser1 = new javax.swing.JFileChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -56,53 +63,27 @@ public class FileSelectView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   public void showOpen(){
-       int result=jFileChooser1.showOpenDialog(this);
-        if(result==JFileChooser.APPROVE_OPTION){
+    /**
+     * Opens the open dialog for the user to select a text file
+     */
+    public void showOpen() {
+        int result = jFileChooser1.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
             fileController.openFile(jFileChooser1.getSelectedFile().getAbsolutePath());
         }
     }
-   
- public void showSave(){
-     int result=jFileChooser1.showSaveDialog(this);
-        if(result==JFileChooser.APPROVE_OPTION){
+
+    /**
+     * Opens a save dialog for the user to select a directory and name for the
+     * text to be saved to
+     */
+    public void showSave() {
+        int result = jFileChooser1.showSaveDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
             fileController.saveAs(jFileChooser1.getSelectedFile().getAbsolutePath());
         }
     }
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(FileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(FileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(FileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(FileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new FileView().setVisible(true);
-//            }
-//        });
-//    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser jFileChooser1;

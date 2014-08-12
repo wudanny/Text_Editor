@@ -10,10 +10,8 @@ import java.io.Reader;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
- *
- * @author Danny
+ * The UI component of the text editor. Consists of the menu, tool bar and the text area.
  */
 public class EditorView extends javax.swing.JFrame {
 
@@ -22,10 +20,16 @@ public class EditorView extends javax.swing.JFrame {
      */
     private TextController textController;
     private FileController fileController;
+
+    /**
+     * Constructor for the editor view
+     * @param textController A TextController object that controls the text part of the editor
+     * @param fileController A FileController object that controls the files of the editor
+     */
     public EditorView(TextController textController, FileController fileController) {
         initComponents();
-        this.textController=textController;
-        this.fileController=fileController;
+        this.textController = textController;
+        this.fileController = fileController;
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(textController.getFontNames().toArray()));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(textController.getFontSizes().toArray()));
         setWindowTitle(fileController.getFileName());
@@ -282,156 +286,241 @@ public class EditorView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * When a font name is selected from the drop down list.
+     */
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
         textController.setFontSize(Integer.valueOf(String.valueOf(jComboBox1.getSelectedItem())));
         this.setFont(textController.getFont());
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    /**
+     * When a font size is selected from the drop down list
+     *
+     * @param evt
+     */
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
         textController.setFontName(String.valueOf(jComboBox2.getSelectedItem()));
         this.setFont(textController.getFont());
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
+    /**
+     * When the cut button is pushed
+     *
+     * @param evt
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         jTextPane1.cut();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * When the copy button is pushed
+     *
+     * @param evt
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         jTextPane1.copy();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    /**
+     * When the paste button is pushed
+     *
+     * @param evt
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         jTextPane1.paste();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    /**
+     * When a key is typed in the textpane
+     *
+     * @param evt
+     */
     private void jTextPane1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPane1KeyTyped
         // TODO add your handling code here:
-        
+        fileController.setChanged(true);
     }//GEN-LAST:event_jTextPane1KeyTyped
 
+    /**
+     * When the new button is pushed
+     *
+     * @param evt
+     */
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         fileController.newFileClicked();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    /**
+     * When the clear all menu item is clicked
+     *
+     * @param evt
+     */
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         // TODO add your handling code here:
         jTextPane1.selectAll();
         jTextPane1.cut();
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
+    /**
+     * When the deselect all menu button is clicked
+     *
+     * @param evt
+     */
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         // TODO add your handling code here:
         jTextPane1.setSelectionStart(jTextPane1.getSelectionEnd());
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
+    /**
+     * When the select all menu button is clicked
+     *
+     * @param evt
+     */
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
         jTextPane1.selectAll();
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+    /**
+     * When the paste menu button is clicked
+     *
+     * @param evt
+     */
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         // TODO add your handling code here:
         jTextPane1.paste();
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
+    /**
+     * When the copy menu menu button is clicked
+     *
+     * @param evt
+     */
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
         jTextPane1.copy();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    /**
+     * When the cut menu button is clicked
+     *
+     * @param evt
+     */
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
         jTextPane1.cut();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+    /**
+     * When the quit menu button is clicked
+     *
+     * @param evt
+     */
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
         fileController.quitFileClicked();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    /**
+     * When the save as menu button is clicked
+     *
+     * @param evt
+     */
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
         fileController.saveAsClicked();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    /**
+     * When the save menu button is clicked
+     *
+     * @param evt
+     */
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         fileController.saveFileClicked();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    /**
+     * When the open menu button is clicked
+     *
+     * @param evt
+     */
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
         fileController.openFileClicked();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    /**
+     * When the rename menu button is clicked
+     *
+     * @param evt
+     */
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
         fileController.renameFileClicked("SomethingFun");
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    /**
+     * When the new file menu button is clicked
+     *
+     * @param evt
+     */
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         fileController.newFileClicked();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    public void setFont(Font newFont){
+    /**
+     * Sets the new font to be displayed
+     *
+     * @param newFont A Font object that represents the font desired
+     */
+    public void setFont(Font newFont) {
         jTextPane1.setFont(newFont);
     }
-    
-    public void newTextArea(){
+
+    /**
+     * Clears the text area content
+     */
+    public void newTextArea() {
         jTextPane1.setText("");
     }
-    
-    public String getText(){
+
+    /**
+     * Retrieve the text content in the text area.
+     *
+     * @return A String object that contains the content in the text area
+     */
+    public String getText() {
         return jTextPane1.getText();
     }
-    public void addText(Reader stream, String path) throws IOException{
-        jTextPane1.read(stream, path);
+
+    /**
+     * Clears the previous text content in the text area and reads in from the
+     * Reader stream to fill the new text content
+     *
+     * @param stream A Reader object that contains the new content to fill the
+     * text area
+     * @throws IOException if the Reader stream was unable to be read from
+     */
+    public void addText(Reader stream) throws IOException {
+        jTextPane1.read(stream, this.getTitle());
     }
-    
-    void setWindowTitle(String name){
+
+    /**
+     * Sets the window title
+     *
+     * @param name A String object that represents the name of the window title
+     */
+    void setWindowTitle(String name) {
         this.setTitle(name);
     }
-    
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(TestWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(TestWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(TestWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(TestWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new TestWindow().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
