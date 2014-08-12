@@ -173,6 +173,14 @@ public class TextController {
             }
 
         });
+        
+         java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+               RenameView renameView= new RenameView(fileController);
+               renameView.setVisible(false);
+               fileController.setRenameView(renameView);
+            }
+        });
 
     }
 }

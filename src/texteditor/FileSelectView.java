@@ -41,7 +41,7 @@ public class FileSelectView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+        jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.FILES_AND_DIRECTORIES);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,6 +67,7 @@ public class FileSelectView extends javax.swing.JFrame {
      * Opens the open dialog for the user to select a text file
      */
     public void showOpen() {
+        jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
         int result = jFileChooser1.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             fileController.openFile(jFileChooser1.getSelectedFile().getAbsolutePath());
@@ -78,6 +79,7 @@ public class FileSelectView extends javax.swing.JFrame {
      * text to be saved to
      */
     public void showSave() {
+        jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
         int result = jFileChooser1.showSaveDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             fileController.saveAs(jFileChooser1.getSelectedFile().getAbsolutePath());

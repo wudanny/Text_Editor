@@ -24,6 +24,7 @@ public class FileController {
     private FileSelectView fileView;
     private EditorView editorView;
     private TextController textController;
+    private RenameView renameView;
 
     /**
      * Constructor for the file controller and sets new text to the name
@@ -152,19 +153,31 @@ public class FileController {
     /**
      * The rename button is clicked.
      *
-     * @param rename
      */
-    void renameFileClicked(String rename) {
-        this.fileName = rename;
-        renameFile();
+    void renameFileClicked() {
+        renameView.setTextName(this.fileName);
+        renameView.setVisible(true);
+    }
+
+    /**
+     * The cancel button is clicked on renameView
+     */
+    void renameFileCanceled() {
+        renameView.setVisible(false);
     }
 
     /**
      * change the file name to reflect the name change.
+     *
+     * @param rename
      */
-    void renameFile() {
-        filePath.renameTo(new File(filePath.getParent() + "/" + this.fileName));
+    void renameFile(String rename) {
+        renameView.setVisible(false);
+        this.fileName = rename;
         editorView.setWindowTitle(fileName);
+        if (filePath != null) {
+            filePath.renameTo(new File(filePath.getParent() + "/" + this.fileName));
+        }
     }
 
     /**
@@ -199,6 +212,15 @@ public class FileController {
      */
     void setEditorView(EditorView editorView) {
         this.editorView = editorView;
+    }
+
+    /**
+     * Sets the rename view.
+     *
+     * @param renameView A RenameView object that represents the renaming UI.
+     */
+    void setRenameView(RenameView renameView) {
+        this.renameView = renameView;
     }
 
     /**

@@ -463,7 +463,7 @@ public class EditorView extends javax.swing.JFrame {
      */
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-        fileController.renameFileClicked("SomethingFun");
+        fileController.renameFileClicked();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
